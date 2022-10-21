@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 internal class Program {
 	public static void Main(string[] args) {
 		var builder = WebApplication.CreateBuilder(args);

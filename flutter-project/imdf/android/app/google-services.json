@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023534012974",
+    "project_id": "imdf-36f5a",
+    "storage_bucket": "imdf-36f5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023534012974:android:4cb623ed5a9f71820a9dbf",
+        "android_client_info": {
+          "package_name": "com.example.imdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023534012974-ikpr7q25vob0kt86ae0fpcn519rt6jf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlTAETzA423yIfZ1y92atED5EdKYEcLdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023534012974-ikpr7q25vob0kt86ae0fpcn519rt6jf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

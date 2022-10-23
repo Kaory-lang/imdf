@@ -37,14 +37,13 @@ namespace imdf.Migrations
                     b.Property<int>("Comment_MovieId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Comment_UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Comment_UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Comment_Id");
 
                     b.HasIndex("Comment_MovieId");
-
-                    b.HasIndex("Comment_UserId");
 
                     b.ToTable("Comment", (string)null);
                 });
@@ -60,14 +59,13 @@ namespace imdf.Migrations
                     b.Property<int>("Favourite_MovieId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Favourite_UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Favourite_UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Favourite_Id");
 
                     b.HasIndex("Favourite_MovieId");
-
-                    b.HasIndex("Favourite_UserId");
 
                     b.ToTable("Favourite", (string)null);
                 });
@@ -110,19 +108,6 @@ namespace imdf.Migrations
                     b.HasIndex("GenderXMovie_MovieId");
 
                     b.ToTable("GenderXMovie", (string)null);
-                });
-
-            modelBuilder.Entity("imdf.Database.Models.IMDFUser", b =>
-                {
-                    b.Property<int>("User_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_Id"), 1L, 1);
-
-                    b.HasKey("User_Id");
-
-                    b.ToTable("IMDFUser", (string)null);
                 });
 
             modelBuilder.Entity("imdf.Database.Models.Movie", b =>
@@ -180,8 +165,9 @@ namespace imdf.Migrations
                     b.Property<int>("Vote_MovieId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Vote_UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Vote_UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Vote_Valoration")
                         .HasColumnType("float");
@@ -189,8 +175,6 @@ namespace imdf.Migrations
                     b.HasKey("Vote_Id");
 
                     b.HasIndex("Vote_MovieId");
-
-                    b.HasIndex("Vote_UserId");
 
                     b.ToTable("Vote", (string)null);
                 });
@@ -203,15 +187,7 @@ namespace imdf.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("imdf.Database.Models.IMDFUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Comment_UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Movie");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("imdf.Database.Models.Favourite", b =>
@@ -222,15 +198,7 @@ namespace imdf.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("imdf.Database.Models.IMDFUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Favourite_UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Movie");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("imdf.Database.Models.GenderXMovie", b =>
@@ -260,15 +228,7 @@ namespace imdf.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("imdf.Database.Models.IMDFUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Vote_UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Movie");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("imdf.Database.Models.Gender", b =>

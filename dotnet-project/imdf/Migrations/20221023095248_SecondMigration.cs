@@ -10,6 +10,14 @@ namespace imdf.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_Comment_IMDFUser_Comment_UserId",
+                table: "Comment");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Favourite_IMDFUser_Favourite_UserId",
+                table: "Favourite");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Movie_Director_Movie_DirectorId",
                 table: "Movie");
 
@@ -20,27 +28,26 @@ namespace imdf.Migrations
                 name: "Director");
 
             migrationBuilder.DropTable(
+                name: "IMDFUser");
+
+            migrationBuilder.DropTable(
                 name: "Actor");
 
             migrationBuilder.DropIndex(
                 name: "IX_Movie_Movie_DirectorId",
                 table: "Movie");
 
+            migrationBuilder.DropIndex(
+                name: "IX_Favourite_Favourite_UserId",
+                table: "Favourite");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Comment_Comment_UserId",
+                table: "Comment");
+
             migrationBuilder.DropColumn(
                 name: "Movie_ReleaseDate",
                 table: "Movie");
-
-            migrationBuilder.DropColumn(
-                name: "User_Email",
-                table: "IMDFUser");
-
-            migrationBuilder.DropColumn(
-                name: "User_Name",
-                table: "IMDFUser");
-
-            migrationBuilder.DropColumn(
-                name: "User_Password",
-                table: "IMDFUser");
 
             migrationBuilder.RenameColumn(
                 name: "Movie_DirectorId",
@@ -88,6 +95,22 @@ namespace imdf.Migrations
                 type: "nvarchar(max)",
                 nullable: true);
 
+            migrationBuilder.AlterColumn<string>(
+                name: "Favourite_UserId",
+                table: "Favourite",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Comment_UserId",
+                table: "Comment",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int");
+
             migrationBuilder.CreateTable(
                 name: "Vote",
                 columns: table => new
@@ -95,18 +118,12 @@ namespace imdf.Migrations
                     Vote_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Vote_MovieId = table.Column<int>(type: "int", nullable: false),
-                    Vote_UserId = table.Column<int>(type: "int", nullable: false),
+                    Vote_UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Vote_Valoration = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vote", x => x.Vote_Id);
-                    table.ForeignKey(
-                        name: "FK_Vote_IMDFUser_Vote_UserId",
-                        column: x => x.Vote_UserId,
-                        principalTable: "IMDFUser",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vote_Movie_Vote_MovieId",
                         column: x => x.Vote_MovieId,
@@ -119,11 +136,6 @@ namespace imdf.Migrations
                 name: "IX_Vote_Vote_MovieId",
                 table: "Vote",
                 column: "Vote_MovieId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vote_Vote_UserId",
-                table: "Vote",
-                column: "Vote_UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -175,26 +187,21 @@ namespace imdf.Migrations
                 type: "datetime2",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "User_Email",
-                table: "IMDFUser",
-                type: "nvarchar(max)",
+            migrationBuilder.AlterColumn<int>(
+                name: "Favourite_UserId",
+                table: "Favourite",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
-            migrationBuilder.AddColumn<string>(
-                name: "User_Name",
-                table: "IMDFUser",
-                type: "nvarchar(max)",
+            migrationBuilder.AlterColumn<int>(
+                name: "Comment_UserId",
+                table: "Comment",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "User_Password",
-                table: "IMDFUser",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
                 name: "Actor",
@@ -224,6 +231,21 @@ namespace imdf.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Director", x => x.Director_Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IMDFUser",
+                columns: table => new
+                {
+                    User_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    User_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    User_Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IMDFUser", x => x.User_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +280,16 @@ namespace imdf.Migrations
                 column: "Movie_DirectorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favourite_Favourite_UserId",
+                table: "Favourite",
+                column: "Favourite_UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_Comment_UserId",
+                table: "Comment",
+                column: "Comment_UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ActorXMovie_ActorXMovie_ActorId",
                 table: "ActorXMovie",
                 column: "ActorXMovie_ActorId");
@@ -266,6 +298,22 @@ namespace imdf.Migrations
                 name: "IX_ActorXMovie_ActorXMovie_MovieId",
                 table: "ActorXMovie",
                 column: "ActorXMovie_MovieId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Comment_IMDFUser_Comment_UserId",
+                table: "Comment",
+                column: "Comment_UserId",
+                principalTable: "IMDFUser",
+                principalColumn: "User_Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Favourite_IMDFUser_Favourite_UserId",
+                table: "Favourite",
+                column: "Favourite_UserId",
+                principalTable: "IMDFUser",
+                principalColumn: "User_Id",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Movie_Director_Movie_DirectorId",

@@ -12,7 +12,7 @@ public class Movie {
 	public string? Movie_Synopsis { get; set; }
 	public string? Movie_Country { get; set; }
 	public int? Movie_ReleaseYear { get; set; }
-	public double Movie_Duration { get; set; }
+	public int Movie_Duration { get; set; }
 	public double? Movie_Valoration { get; set; }
 	public string? Movie_Director { get; set; }
 	public string? Movie_Cast { get; set; }

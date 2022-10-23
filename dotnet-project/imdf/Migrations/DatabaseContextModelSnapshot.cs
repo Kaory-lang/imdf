@@ -148,8 +148,8 @@ namespace imdf.Migrations
                     b.Property<string>("Movie_Director")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Movie_Duration")
-                        .HasColumnType("float");
+                    b.Property<int>("Movie_Duration")
+                        .HasColumnType("int");
 
                     b.Property<string>("Movie_Name")
                         .IsRequired()

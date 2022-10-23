@@ -5,7 +5,9 @@ using imdf.Database;
 
 internal class Program {
 	public static void Main(string[] args) {
-		FillDB.fill_db_with_test_data();
+		// Fill Database With Test Data
+		// FillDB.fill_db_with_test_data();
+		
 		var builder = WebApplication.CreateBuilder(args);
 
 		// Add services to the container.

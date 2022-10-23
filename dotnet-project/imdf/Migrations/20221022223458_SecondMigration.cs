@@ -56,10 +56,10 @@ namespace imdf.Migrations
                 oldType: "real",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<double>(
+            migrationBuilder.AlterColumn<int>(
                 name: "Movie_Duration",
                 table: "Movie",
-                type: "float",
+                type: "int",
                 nullable: false,
                 oldClrType: typeof(float),
                 oldType: "real");
@@ -166,8 +166,8 @@ namespace imdf.Migrations
                 table: "Movie",
                 type: "real",
                 nullable: false,
-                oldClrType: typeof(double),
-                oldType: "float");
+                oldClrType: typeof(int),
+                oldType: "int");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Movie_ReleaseDate",

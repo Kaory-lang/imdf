@@ -12,7 +12,7 @@ using imdf.Database;
 namespace imdf.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221022221657_SecondMigration")]
+    [Migration("20221022223458_SecondMigration")]
     partial class SecondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,8 +150,8 @@ namespace imdf.Migrations
                     b.Property<string>("Movie_Director")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Movie_Duration")
-                        .HasColumnType("float");
+                    b.Property<int>("Movie_Duration")
+                        .HasColumnType("int");
 
                     b.Property<string>("Movie_Name")
                         .IsRequired()

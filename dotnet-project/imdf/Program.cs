@@ -27,6 +27,12 @@ internal class Program {
 			app.UseSwaggerUI();
 		}
 
+		app.UseCors(x => x
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.SetIsOriginAllowed(origin => true)
+				.AllowCredentials());
+
 		//app.UseHttpsRedirection();
 
 		app.UseAuthorization();

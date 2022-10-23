@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       title: 'IMDF',
       routes: {
         '/': (context) => SigninScreen(),
-        'signin': (context) => SigninScreen(),
-        //'signup': (context) => SignupScreen(),
+        '/signin': (context) => SigninScreen(),
+        //'/signup': (context) => SignupScreen(),
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/MovieThumbnail.dart';
+import '../widgets/ApiUrl.dart';
 
 class MainScreen extends StatefulWidget {
   String? uid;
@@ -20,7 +21,7 @@ class _MainScreen extends State<MainScreen> {
   _MainScreen(this.uid);
 
   void fetch_data() async {
-    var fetch = await http.get(Uri.parse("http://localhost:7265/api/Movie"));
+    var fetch = await http.get(Uri.parse(ApiUrl.url+"/api/Movie"));
     setState(() => _datas = jsonDecode(fetch.body));
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './ApiUrl.dart';
 
 class MovieThumbnail extends StatefulWidget {
   var data;
@@ -22,7 +23,7 @@ class _MovieThumbnail extends State<MovieThumbnail> {
 
   void checkIsInFavourites() async {
     var fetch = await http.get(
-      Uri.parse("http://localhost:7265/api/Favourite/${this.uid}/${this.data['movie_Id']}"),
+      Uri.parse(ApiUrl.url+"/api/Favourite/${this.uid}/${this.data['movie_Id']}"),
     );
 
     fetch.body == "true"
@@ -38,7 +39,7 @@ class _MovieThumbnail extends State<MovieThumbnail> {
 
   void saveInFavourites() async {
     var response = await http.post(
-      Uri.parse("http://localhost:7265/api/Favourite/"),
+      Uri.parse(ApiUrl.url+"/api/Favourite/"),
       headers: {"Content-Type": "application/json"},
       body: json.encode({"favourite_MovieId": this.data["movie_Id"], "favourite_UserId": this.uid})
     );
@@ -48,7 +49,7 @@ class _MovieThumbnail extends State<MovieThumbnail> {
 
   void deleteFromFavourites() async {
     var response = await http.delete(
-      Uri.parse("http://localhost:7265/api/Favourite/${this.uid}/${this.data['movie_Id']}"),
+      Uri.parse(ApiUrl.url+"/api/Favourite/${this.uid}/${this.data['movie_Id']}"),
     );
 
     if(response.statusCode == 204) {

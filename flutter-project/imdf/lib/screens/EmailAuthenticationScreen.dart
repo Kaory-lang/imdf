@@ -34,7 +34,6 @@ class _SigninScreenState extends State<SigninScreen> {
         password: password
       );
 
-      print(userCredential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         setState(() => _statusText = "No user found for that email.");

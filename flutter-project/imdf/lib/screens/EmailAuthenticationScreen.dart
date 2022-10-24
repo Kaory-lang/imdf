@@ -13,6 +13,7 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
+  UserCredential? userCredential;
   String _statusText = "";
 
   void clear_status_timer() {
@@ -29,7 +30,7 @@ class _SigninScreenState extends State<SigninScreen> {
     }
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password
       );
@@ -52,7 +53,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MainScreen()),
+      MaterialPageRoute(builder: (context) => MainScreen(uid: userCredential?.user?.uid)),
     );
   }
 

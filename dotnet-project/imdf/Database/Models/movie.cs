@@ -19,6 +19,6 @@ public class Movie {
 	public string? Movie_Cover { get; set; }
 	public string? Movie_Banner { get; set; }
 
-	public virtual ICollection<GenderXMovie> Movie_GendersIds { get; set; }
-	public virtual ICollection<Comment> Comments { get; set; }
+	public virtual ICollection<GenderXMovie>? Movie_GendersIds { get; set; }
+	public virtual ICollection<Comment>? Comments { get; set; }
 }

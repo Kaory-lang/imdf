@@ -50,6 +50,21 @@ namespace imdf.Controllers
             return movie;
         }
 
+        // POST: api/TempMovie
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        {
+          if (_context.Movies == null)
+          {
+              return Problem("Entity set 'DatabaseContext.Movies'  is null.");
+          }
+            _context.Movies.Add(movie);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMovie", new { id = movie.Movie_Id }, movie);
+        }
+
         private bool MovieExists(int id)
         {
             return (_context.Movies?.Any(e => e.Movie_Id == id)).GetValueOrDefault();

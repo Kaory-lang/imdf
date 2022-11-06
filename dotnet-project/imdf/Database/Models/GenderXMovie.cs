@@ -12,7 +12,7 @@ public class GenderXMovie {
 	public int GenderXMovie_MovieId { get; set; }
 
 	[ForeignKey("GenderXMovie_GenderId")]
-	public virtual Gender Gender { get; set; }
+	public virtual Gender? Gender { get; set; }
 	[ForeignKey("GenderXMovie_MovieId")]
-	public virtual Movie Movie { get; set; }
+	public virtual Movie? Movie { get; set; }
 }

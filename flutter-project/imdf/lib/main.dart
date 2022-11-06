@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'utils/firebase_options.dart';
 import 'screens/EmailAuthenticationScreen.dart';
 import 'screens/MainScreen.dart';
+import 'screens/AddMovieScreen.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => SigninScreen(),
         '/signin': (context) => SigninScreen(),
         '/main': (context) => MainScreen(),
+        '/add_movie': (context) => AddMovieScreen(),
       },
     );
   }

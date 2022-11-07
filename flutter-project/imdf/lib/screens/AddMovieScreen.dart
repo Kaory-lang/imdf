@@ -185,7 +185,6 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: const Text("Add Movie"),
       ),
       body: ListView(children: [

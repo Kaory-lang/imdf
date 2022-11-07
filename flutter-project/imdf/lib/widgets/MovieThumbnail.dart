@@ -57,6 +57,37 @@ class _MovieThumbnail extends State<MovieThumbnail> {
     }
   }
 
+  void delete_movie() async {
+    var response = await http.delete(
+      Uri.parse(ApiUrl.url + "/api/Movie/${this.data['movie_Id']}")
+    );
+
+    if(response.statusCode == 204) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Movie successfully deleted."),
+          duration: Duration(seconds: 3),
+        )
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error deleting the movie."),
+          duration: Duration(seconds: 3),
+        )
+      );
+    }
+  }
+
+  void showDialogConfirmation(context) {
+    delete_movie();
+    Navigator.pop(context);
+  }
+
+  void showDialogNegation(context) {
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     checkIsInFavourites();
@@ -74,6 +105,65 @@ class _MovieThumbnail extends State<MovieThumbnail> {
     if(data != null) {
       if(data["movie_Cover"] != null)
         imageContent = Image.network(data["movie_Cover"]);
+    }
+
+    List<Widget> variableAdminContent = <Widget>[];
+
+    TextButton okButton = new TextButton(
+      child: Text("Confirm"),
+      onPressed: () => showDialogConfirmation(context)
+    );
+
+    TextButton cancelButton = new TextButton(
+      child: Text("Cancel"),
+      onPressed: () => showDialogNegation(context)
+    );
+
+    AlertDialog alertDialog = new AlertDialog(
+      title: new Text("Alert"),
+      content: new Text("Are you sure you want to delete this movie from Database?"),
+      actions: [okButton, cancelButton],
+    );
+
+    if(this.uid == "58NvYoPnPYTQ7rGpAGXfIhIPsRm2") {
+      variableAdminContent = [
+        Expanded(
+          child: IconButton(
+            icon: favouriteIcon,
+            onPressed: () => {
+              if(isInFavourites)
+                deleteFromFavourites()
+              else
+                saveInFavourites()
+            },
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            icon: Icon(Icons.delete_rounded),
+            onPressed: () => {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => alertDialog
+              ),
+            },
+          ),
+        ),
+      ];
+    } else {
+      variableAdminContent = [
+        Expanded(
+          child: IconButton(
+            icon: favouriteIcon,
+            onPressed: () => {
+              if(isInFavourites)
+                deleteFromFavourites()
+              else
+                saveInFavourites()
+            },
+          ),
+        ),
+      ];
     }
 
     return Column(
@@ -111,15 +201,9 @@ class _MovieThumbnail extends State<MovieThumbnail> {
                 width: size,
                 height: size,
                 color: Colors.red,
-                child: IconButton(
-                  icon: favouriteIcon,
-                  onPressed: () => {
-                    if(isInFavourites)
-                      deleteFromFavourites()
-                    else
-                      saveInFavourites()
-                  },
-                ),
+                child: new Row(
+                  children: variableAdminContent,
+                )
               ),
             ),
           ]

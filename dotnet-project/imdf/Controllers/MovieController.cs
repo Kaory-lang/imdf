@@ -65,6 +65,26 @@ namespace imdf.Controllers
             return CreatedAtAction("GetMovie", new { id = movie.Movie_Id }, movie);
         }
 
+        // DELETE: api/TempMovie/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            if (_context.Movies == null)
+            {
+                return NotFound();
+            }
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            _context.Movies.Remove(movie);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool MovieExists(int id)
         {
             return (_context.Movies?.Any(e => e.Movie_Id == id)).GetValueOrDefault();

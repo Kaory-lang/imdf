@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/MovieThumbnail.dart';
 import '../widgets/ApiUrl.dart';
+import '../widgets/ApiUrl.dart';
+import './AddMovieScreen.dart';
 
 class MainScreen extends StatefulWidget {
   String? uid;
@@ -40,16 +42,40 @@ class _MainScreen extends State<MainScreen> {
         thumbnails.add(MovieThumbnail(data: data, uid: this.uid));
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text("IMDF Main"),
-      ),
-      body: ListView(
-        padding: EdgeInsets.all(20.0),
-        children: thumbnails,
-      ),
-    );
+    if(this.uid == "58NvYoPnPYTQ7rGpAGXfIhIPsRm2") {
+      return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text("IMDF Main"),
+          leading: GestureDetector(
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => new AddMovieScreen()),
+              )
+            },
+            child: Icon(
+              Icons.note_add
+            ),
+          ),
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(20.0),
+          children: thumbnails,
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text("IMDF Main"),
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(20.0),
+          children: thumbnails,
+        ),
+      );
+    }
   }
 }
 

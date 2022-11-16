@@ -11,8 +11,6 @@ class AddMovieScreen extends StatefulWidget {
 }
 
 class _AddMovieScreenState extends State<AddMovieScreen> {
-  final _name = new TextEditingController();
-
   List<String> _fields = ["*Name", "Synopsis", "Country", "Release Year", "*Duration",
                         "Valoration", "Director", "Cast", "Cover", "Banner", "*Genders"];
 

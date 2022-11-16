@@ -13,5 +13,5 @@ public class Vote {
 	public double Vote_Valoration { get; set; }
 
 	[ForeignKey("Vote_MovieId")]
-	public virtual Movie Movie { get; set; }
+	public virtual Movie? Movie { get; set; }
 }

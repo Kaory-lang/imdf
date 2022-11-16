@@ -12,5 +12,5 @@ public class Comment {
 	public int Comment_MovieId { get; set; }
 
 	[ForeignKey("Comment_MovieId")]
-	public virtual Movie Movie { get; set; }
+	public virtual Movie? Movie { get; set; }
 }

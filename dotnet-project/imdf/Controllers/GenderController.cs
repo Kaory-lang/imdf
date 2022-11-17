@@ -31,6 +31,25 @@ namespace imdf.Controllers
           }
             return await _context.Genders.ToListAsync();
         }
+		
+        // GET: api/Gender
+        [HttpGet("{gId}")]
+        public async Task<ActionResult<Gender>> GetGenders(int gId)
+        {
+          if (_context.Genders == null)
+          {
+              return NotFound();
+          }
+		  
+		  List<Gender> genders = _context.Genders.Where(x => x.Gender_Id == gId).ToList();
+
+          if (genders.Count < 1)
+          {
+              return NotFound();
+          }
+
+		  return genders[0];
+        }
 
         private bool GenderExists(int id)
         {

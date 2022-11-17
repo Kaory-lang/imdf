@@ -33,21 +33,24 @@ namespace imdf.Controllers
         }
 
         // GET: api/GenderXMovie/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GenderXMovie>> GetGenderXMovie(int id)
+        [HttpGet("{mId}")]
+        public async Task<ActionResult<List<GenderXMovie>>> GetGenderXMovie(int mId)
         {
           if (_context.GendersXMovies == null)
           {
               return NotFound();
           }
-            var genderXMovie = await _context.GendersXMovies.FindAsync(id);
 
-            if (genderXMovie == null)
+		  List<GenderXMovie> gxm = _context.GendersXMovies.Where(
+		      x => x.GenderXMovie_MovieId == mId
+		  ).ToList();
+
+            if (gxm.Count < 1)
             {
                 return NotFound();
             }
 
-            return genderXMovie;
+            return gxm;
         }
 
         // PUT: api/GenderXMovie/5

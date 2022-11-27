@@ -39,14 +39,17 @@ class _MainScreen extends State<MainScreen> {
     List<Widget> thumbnails = <Widget>[];
 
     if(_datas != null) {
-      for(final data in _datas)
-        thumbnails.add(new GestureDetector(
-          child: MovieThumbnail(data: data, uid: this.uid),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => new MovieScreen(data: data, uid: this.uid)),
-          ),
-        ));
+      for(final data in _datas) {
+        thumbnails.add(
+          new GestureDetector(
+            child: MovieThumbnail(data: data, uid: this.uid),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => new MovieScreen(data: data, uid: this.uid)),
+            ),
+          )
+        );
+      }
     }
 
     if(this.uid == "58NvYoPnPYTQ7rGpAGXfIhIPsRm2") {
@@ -66,8 +69,12 @@ class _MainScreen extends State<MainScreen> {
             ),
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.all(20.0),
+        body: GridView.count(
+          mainAxisSpacing: 20.0,
+          crossAxisSpacing: 20.0,
+          childAspectRatio: 0.5625,
+          physics: BouncingScrollPhysics(),
+          crossAxisCount: 3,
           children: thumbnails,
         ),
       );
@@ -77,8 +84,12 @@ class _MainScreen extends State<MainScreen> {
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
         ),
-        body: ListView(
-          padding: EdgeInsets.all(20.0),
+        body: GridView.count(
+          mainAxisSpacing: 20.0,
+          crossAxisSpacing: 20.0,
+          childAspectRatio: 0.5625,
+          physics: BouncingScrollPhysics(),
+          crossAxisCount: 3,
           children: thumbnails,
         ),
       );

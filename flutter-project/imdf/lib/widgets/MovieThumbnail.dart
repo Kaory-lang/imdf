@@ -129,6 +129,8 @@ class _MovieThumbnail extends State<MovieThumbnail> {
       variableAdminContent = [
         Expanded(
           child: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
             icon: favouriteIcon,
             onPressed: () => {
               if(isInFavourites)
@@ -140,6 +142,8 @@ class _MovieThumbnail extends State<MovieThumbnail> {
         ),
         Expanded(
           child: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
             icon: Icon(Icons.delete_rounded),
             onPressed: () => {
               showDialog(
@@ -166,50 +170,36 @@ class _MovieThumbnail extends State<MovieThumbnail> {
       ];
     }
 
-    return Column(
+    return new Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                width: size,
-                height: size,
-                color: Colors.grey,
-                child: imageContent,
-              ),
-            ),
-            Expanded(
-              flex: 7,
-              child: Container(
-                width: size,
-                height: size,
-                color: Colors.blue,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text("${data['movie_Name']}"),
-                    Text("${data['movie_Synopsis']}", overflow: TextOverflow.ellipsis),
-                    Text("${data['movie_ReleaseYear']}"),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                width: size,
-                height: size,
-                color: Colors.red,
-                child: new Row(
-                  children: variableAdminContent,
-                )
-              ),
-            ),
-          ]
+        new Expanded(
+          flex: 1,
+          child: new Container(
+            color: Colors.grey,
+            child: imageContent,
+          ),
         ),
-        SizedBox(width: 20, height: 20),
-      ],
+        new Expanded(
+          flex: 1,
+          child: new Container(
+            color: Colors.blue,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("${data['movie_Name']}", overflow: TextOverflow.ellipsis),
+                Text("${data['movie_Synopsis']}", overflow: TextOverflow.ellipsis),
+                Text("${data['movie_ReleaseYear']}"),
+              ],
+            ),
+          ),
+        ),
+        new Container(
+          color: Colors.red,
+          child: new Row(
+            children: variableAdminContent,
+          )
+        ),
+        ]
     );
   }
 }

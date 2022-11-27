@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import '../widgets/ApiUrl.dart';
 import '../widgets/BannerSection.dart' as banner;
 import '../widgets/HeaderSection.dart';
+import '../widgets/CommentsSection.dart';
 import 'dart:convert';
 
 class MovieScreen extends StatefulWidget {
@@ -28,8 +29,18 @@ class _MovieScreenState extends State<MovieScreen> {
       ),
       body: new Column(
         children: <Widget>[
-          new banner.Banner(),
-          new Header(data: this.data, uid: this.uid),
+          new Expanded(
+            flex: 1,
+            child:banner.Banner(),
+          ),
+          new Expanded(
+            flex: 1,
+            child: new Header(data: this.data, uid: this.uid),
+          ),
+          new Expanded(
+            flex: 3,
+            child: new CommentsSection(data: this.data, uid: this.uid),
+          ),
         ]
       ),
     );

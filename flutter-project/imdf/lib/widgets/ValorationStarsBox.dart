@@ -112,6 +112,7 @@ class _ValorationStarsBoxState extends State<ValorationStarsBox> {
   @override
   Widget build(BuildContext context) {
     return new Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [new Text(this.valoration.toString()), ...this.stars],
     );
   }

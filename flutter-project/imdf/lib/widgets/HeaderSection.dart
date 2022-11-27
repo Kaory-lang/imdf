@@ -58,20 +58,35 @@ class _HeaderState extends State<Header> {
       color: Colors.blue,
       height: 100,
       child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Text(this.data["movie_Name"]),
-              new Text(gendersText),
-            ],
+          new Expanded(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Text(this.data["movie_Name"]),
+                    new Text("    (${gendersText})"),
+                  ]
+                ),
+                new Text(""),
+                new Expanded(
+                  child: new SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: new Text("Synopsis: ${this.data['movie_Synopsis']}"),
+                  ),
+                ),
+              ],
+            ),
           ),
 
-          new Container(
-            color: Colors.grey,
-            child: ValorationStarsBox(data: this.data, uid: this.uid)
-          )
+          new Expanded(
+            child: new Container(
+              color: Colors.grey,
+              child: ValorationStarsBox(data: this.data, uid: this.uid)
+            ),
+          ),
         ],
       ),
     );

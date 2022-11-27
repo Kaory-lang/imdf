@@ -67,15 +67,11 @@ class _CommentsSectionState extends State<CommentsSection> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           new Expanded(
-            flex: 3,
             child: new ListView(
               children: <Widget>[...this.comments],
             ) 
           ),
-          new Expanded(
-            flex: 1,
-            child: new WritableCommentBox(data: this.data, uid: this.uid)
-          ),
+          new WritableCommentBox(data: this.data, uid: this.uid)
         ],
       ),
     );

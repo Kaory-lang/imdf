@@ -101,7 +101,7 @@ namespace imdf.Controllers
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetComment", new { id = comment.Comment_Id }, comment);
+            return Ok();
         }
 
         // DELETE: api/Comment/5

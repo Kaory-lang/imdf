@@ -186,7 +186,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MainScreen(uid: useCredential?.user?.uid)),
+      MaterialPageRoute(builder: (context) => MainScreen(uid: userCredential?.user?.uid)),
     );
   }
 

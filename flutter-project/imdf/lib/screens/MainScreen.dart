@@ -8,6 +8,7 @@ import '../widgets/ApiUrl.dart';
 import './AddMovieScreen.dart';
 import './MovieScreen.dart';
 import './EditGenderScreen.dart';
+import './FavoritesScreen.dart';
 
 class MainScreen extends StatefulWidget {
   String? uid;
@@ -35,7 +36,7 @@ class _MainScreen extends State<MainScreen> {
     super.initState();
   }
 
-  void admin_options(int option, BuildContext context) {
+  void popup_menu_options(int option, BuildContext context) {
     if (option == 1) {
       Navigator.push(
         context,
@@ -55,6 +56,11 @@ class _MainScreen extends State<MainScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => new EditGenderScreen()),
+      );
+    }else if (option == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => new FavoritesScreen(uid: this.uid)),
       );
     }
   }
@@ -83,15 +89,19 @@ class _MainScreen extends State<MainScreen> {
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
           actions: [
+            new IconButton(
+              icon: new Icon(Icons.favorite),
+              onPressed: () => this.popup_menu_options(3, context)
+            ),
             new PopupMenuButton(
               itemBuilder: (context) => [
-                PopupMenuItem(
+                new PopupMenuItem(
                   child: new Text("Add Movie"),
-                  onTap: () => this.admin_options(1, context)
+                  onTap: () => this.popup_menu_options(1, context)
                 ),
-                PopupMenuItem(
+                new PopupMenuItem(
                   child: new Text("Edit Genders"),
-                  onTap: () => this.admin_options(2, context)
+                  onTap: () => this.popup_menu_options(2, context)
                 ),
               ],
             ),
@@ -111,6 +121,12 @@ class _MainScreen extends State<MainScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.favorite),
+              onPressed: () => this.popup_menu_options(3, context)
+            ),
+          ]
         ),
         body: GridView.count(
           mainAxisSpacing: 20.0,

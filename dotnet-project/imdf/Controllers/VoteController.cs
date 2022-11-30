@@ -36,7 +36,7 @@ namespace imdf.Controllers
 		  foreach(Vote vote in votes)
 			  acc += vote.Vote_Valoration;
 
-		  return acc/votes.Count;
+		  return Math.Round(acc/votes.Count, 1);
         }
 
         // GET: api/Vote

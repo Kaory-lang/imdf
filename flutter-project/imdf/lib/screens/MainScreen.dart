@@ -7,6 +7,7 @@ import '../widgets/ApiUrl.dart';
 import '../widgets/ApiUrl.dart';
 import './AddMovieScreen.dart';
 import './MovieScreen.dart';
+import './EditGenderScreen.dart';
 
 class MainScreen extends StatefulWidget {
   String? uid;
@@ -34,6 +35,30 @@ class _MainScreen extends State<MainScreen> {
     super.initState();
   }
 
+  void admin_options(int option, BuildContext context) {
+    if (option == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => new AddMovieScreen()),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => new AddMovieScreen()),
+      );
+    }else if (option == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => new EditGenderScreen()),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => new EditGenderScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> thumbnails = <Widget>[];
@@ -57,17 +82,20 @@ class _MainScreen extends State<MainScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
-          leading: GestureDetector(
-            onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => new AddMovieScreen()),
-              )
-            },
-            child: Icon(
-              Icons.note_add
+          actions: [
+            new PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: new Text("Add Movie"),
+                  onTap: () => this.admin_options(1, context)
+                ),
+                PopupMenuItem(
+                  child: new Text("Edit Genders"),
+                  onTap: () => this.admin_options(2, context)
+                ),
+              ],
             ),
-          ),
+          ]
         ),
         body: GridView.count(
           mainAxisSpacing: 20.0,

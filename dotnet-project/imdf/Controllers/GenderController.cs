@@ -51,6 +51,41 @@ namespace imdf.Controllers
 		  return genders[0];
         }
 
+        // POST: api/TestGender
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Gender>> PostGender(Gender gender)
+        {
+          if (_context.Genders == null)
+          {
+              return Problem("Entity set 'DatabaseContext.Genders'  is null.");
+          }
+            _context.Genders.Add(gender);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        // DELETE: api/TestGender/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGender(int id)
+        {
+            if (_context.Genders == null)
+            {
+                return NotFound();
+            }
+            var gender = await _context.Genders.FindAsync(id);
+            if (gender == null)
+            {
+                return NotFound();
+            }
+
+            _context.Genders.Remove(gender);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool GenderExists(int id)
         {
             return (_context.Genders?.Any(e => e.Gender_Id == id)).GetValueOrDefault();

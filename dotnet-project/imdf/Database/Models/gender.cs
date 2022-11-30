@@ -10,5 +10,5 @@ public class Gender {
 	public int Gender_Id { get; set; }
 	public string Gender_Name { get; set; }
 
-	public virtual ICollection<GenderXMovie> GendersXMovies { get; set; }
+	public virtual ICollection<GenderXMovie>? GendersXMovies { get; set; }
 }

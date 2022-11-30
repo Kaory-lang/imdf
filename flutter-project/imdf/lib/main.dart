@@ -4,6 +4,7 @@ import 'utils/firebase_options.dart';
 import 'screens/EmailAuthenticationScreen.dart';
 import 'screens/MainScreen.dart';
 import 'screens/AddMovieScreen.dart';
+import 'screens/SelectAuthMethodScreen.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'IMDF',
       routes: {
-        '/': (context) => SigninScreen(),
+        '/': (context) => SelectAuthMethodScreen(),
         '/signin': (context) => SigninScreen(),
         '/main': (context) => MainScreen(),
         '/add_movie': (context) => AddMovieScreen(),

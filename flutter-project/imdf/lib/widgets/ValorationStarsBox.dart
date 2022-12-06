@@ -77,14 +77,20 @@ class _ValorationStarsBoxState extends State<ValorationStarsBox> {
       for (int x = star; x >= 0; x--) {
         this.stars[x] = new GestureDetector(
           onTap: () => change_icon(x),
-          child: new Icon(Icons.star_outlined),
+          child: new Icon(
+            Icons.star_outlined,
+            color: Colors.amber,
+          ),
         ),
       },
 
       for (int x = 4-star; x > 0; x--) {
         this.stars[star+x] = new GestureDetector(
           onTap: () => change_icon(star+x),
-          child: new Icon(Icons.star_border_sharp),
+          child: new Icon(
+            Icons.star_border_sharp,
+            color: Colors.amber,
+          ),
         ),
       },
 
@@ -103,7 +109,10 @@ class _ValorationStarsBoxState extends State<ValorationStarsBox> {
       this.stars.add(
         new GestureDetector(
           onTap: () => change_icon(x),
-          child: new Icon(Icons.star_border_sharp),
+          child: new Icon(
+            Icons.star_border_sharp,
+            color: Colors.amber,
+          ),
         ),
       );
     }
@@ -113,7 +122,12 @@ class _ValorationStarsBoxState extends State<ValorationStarsBox> {
   Widget build(BuildContext context) {
     return new Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: [new Text(this.valoration.toString()), ...this.stars],
+      children: [new Text(
+        this.valoration.toString(),
+        style: new TextStyle(
+          fontSize: 17.0,
+        ),
+      ), ...this.stars],
     );
   }
 }

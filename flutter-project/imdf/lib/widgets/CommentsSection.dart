@@ -35,17 +35,17 @@ class _CommentsSectionState extends State<CommentsSection> {
           this.comments.add(
             new Container(
               decoration: new BoxDecoration(
-                border: new Border(
-                  bottom: new BorderSide(
-                    width: 1.5,
-                    color: Colors.grey,
-                  ),
+                color: Colors.blue,
+                border: new Border.all(
+                  color: Colors.blue,
                 ),
+                borderRadius: new BorderRadius.all(new Radius.circular(10)),
               ),
               padding: EdgeInsets.only(bottom: 10, top: 10),
               child: new Text(field["comment_Body"]),
             )
-          )
+          ),
+          this.comments.add(new Text("")),
         });
       }
     } else {
@@ -62,10 +62,13 @@ class _CommentsSectionState extends State<CommentsSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF2DBD3A),
+      color: Colors.cyan[100],
+      padding: new EdgeInsets.all(10.0),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          new Text("COMMENTS:"),
+          new Text(""),
           new Expanded(
             child: new ListView(
               children: <Widget>[...this.comments],

@@ -54,8 +54,19 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
+    String titles = this.data["movie_Name"];
+    titles += "  •  (${this.data['movie_ReleaseYear']})  •  (${gendersText})";
+
+    List<String> movieDuration= (this.data["movie_Duration"]/60).toStringAsFixed(2).split('.');
+
+    String othData = "Duration: ${movieDuration[0]}:${movieDuration[1]} Hours.";
+    othData += "\n--Director: ${this.data['movie_Director']}.";
+    othData += "\n--Cast: ${this.data['movie_Cast']}.";
+    othData += "\n--Country: ${this.data['movie_Country']}.";
+    othData += "\n\n--Synopsis: ${this.data['movie_Synopsis']}";
+
     return Container(
-      color: Colors.blue,
+      color: Colors.cyan[50],
       height: 100,
       child: new Row(
         children: <Widget>[
@@ -64,17 +75,24 @@ class _HeaderState extends State<Header> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Text(this.data["movie_Name"]),
-                    new Text("    (${gendersText})"),
-                  ]
+                new Text(
+                  titles,
+                  style: new TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.0,
+                  ),
                 ),
                 new Text(""),
                 new Expanded(
                   child: new SingleChildScrollView(
                     scrollDirection: Axis.vertical,
-                    child: new Text("Synopsis: ${this.data['movie_Synopsis']}"),
+                    child: new Text(
+                      othData,
+                      style: new TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17.0,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -83,7 +101,6 @@ class _HeaderState extends State<Header> {
 
           new Expanded(
             child: new Container(
-              color: Colors.grey,
               child: ValorationStarsBox(data: this.data, uid: this.uid)
             ),
           ),

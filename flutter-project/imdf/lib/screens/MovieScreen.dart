@@ -34,11 +34,11 @@ class _MovieScreenState extends State<MovieScreen> {
             child:banner.Banner(data: this.data),
           ),
           new Expanded(
-            flex: 1,
+            flex: 2,
             child: new Header(data: this.data, uid: this.uid),
           ),
           new Expanded(
-            flex: 3,
+            flex: 2,
             child: new CommentsSection(data: this.data, uid: this.uid),
           ),
         ]

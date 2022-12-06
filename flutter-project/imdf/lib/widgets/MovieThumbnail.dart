@@ -103,8 +103,12 @@ class _MovieThumbnail extends State<MovieThumbnail> {
                           );
 
     if(data != null) {
-      if(data["movie_Cover"] != null)
-        imageContent = Image.network(data["movie_Cover"]);
+      if(data["movie_Cover"] != null) {
+        imageContent = new Image.network(
+          data["movie_Cover"],
+          fit: BoxFit.cover,
+        );
+      }
     }
 
     List<Widget> variableAdminContent = <Widget>[];
@@ -143,7 +147,6 @@ class _MovieThumbnail extends State<MovieThumbnail> {
         Expanded(
           child: IconButton(
             padding: EdgeInsets.zero,
-            constraints: BoxConstraints(),
             icon: Icon(Icons.delete_rounded),
             onPressed: () => {
               showDialog(
@@ -175,6 +178,7 @@ class _MovieThumbnail extends State<MovieThumbnail> {
         new Expanded(
           flex: 1,
           child: new Container(
+            constraints: new BoxConstraints.expand(),
             color: Colors.grey,
             child: imageContent,
           ),

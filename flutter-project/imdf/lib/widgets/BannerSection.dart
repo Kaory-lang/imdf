@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 
 class Banner extends StatelessWidget {
-  const Banner({ super.key });
+  var data;
+
+  Banner({ super.key, this.data });
 
   @override
   Widget build(BuildContext context) {
+    Widget imageContent = Icon(
+                            Icons.hide_image_outlined,
+                          );
+
+    if(data != null) {
+      if(data["movie_Banner"] != null) {
+        imageContent = new Image.network(
+          data["movie_Banner"],
+          fit: BoxFit.cover,
+        );
+      }
+    }
+
     return Container(
-      color: Colors.red,
+      color: Colors.grey,
       height: 100,
       width: 300,
-      child: Text("Movie Banner", textAlign: TextAlign.center,),
+      child: imageContent,
+      constraints: new BoxConstraints.expand(),
     );
   }
 }

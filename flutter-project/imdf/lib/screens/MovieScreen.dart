@@ -31,7 +31,7 @@ class _MovieScreenState extends State<MovieScreen> {
         children: <Widget>[
           new Expanded(
             flex: 1,
-            child:banner.Banner(),
+            child:banner.Banner(data: this.data),
           ),
           new Expanded(
             flex: 1,

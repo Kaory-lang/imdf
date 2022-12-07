@@ -60,14 +60,22 @@ class _WritableCommentBoxState extends State<WritableCommentBox> {
         new TextField(
           controller: this.bodyField,
           decoration: new InputDecoration(
-            border: new OutlineInputBorder(),
+            enabledBorder: new OutlineInputBorder(
+              borderSide: new BorderSide(color: Colors.grey,),
+            ),
             labelText: "Comment Body",
+            labelStyle: new TextStyle(color: Colors.grey),
           ),
         ),
+
+        new Text(""),
         
         new ElevatedButton(
           child: new Text("Post Comment"),
-          onPressed: () => this.post_comment()
+          onPressed: () => this.post_comment(),
+          style: new ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.red),
+          ),
         ),
       ],
     );

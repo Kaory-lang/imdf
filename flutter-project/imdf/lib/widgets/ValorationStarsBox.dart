@@ -126,6 +126,7 @@ class _ValorationStarsBoxState extends State<ValorationStarsBox> {
         this.valoration.toString(),
         style: new TextStyle(
           fontSize: 17.0,
+          color: Colors.white,
         ),
       ), ...this.stars],
     );

@@ -12,10 +12,10 @@ class EditGenderScreen extends StatefulWidget {
 }
 
 class _EditGenderScreenState extends State<EditGenderScreen> {
-  List<GenderThumbnail> gendersThumbnails = <GenderThumbnail>[];
+  List<Widget> gendersThumbnails = <Widget>[];
 
   void fetch_genders() async {
-    List<GenderThumbnail> fetchedGenders = <GenderThumbnail>[];
+    List<Widget> fetchedGenders = <Widget>[];
 
     var response = await http.get(
       Uri.parse(ApiUrl.url + "/api/Gender")
@@ -25,11 +25,14 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
 
     List<dynamic> jsonData = json.decode(response.body);
 
-    for (Map<String, dynamic> gender in jsonData)
+    for (Map<String, dynamic> gender in jsonData) {
       fetchedGenders.add(new GenderThumbnail(
           genderId: gender["gender_Id"],
           genderName: gender["gender_Name"]
       ));
+
+      fetchedGenders.add(new Text(""));
+    }
 
     setState(() => this.gendersThumbnails = fetchedGenders);
   }
@@ -43,12 +46,17 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: const Text("Edit Genders Screen")),
+      appBar: new AppBar(
+        title: const Text("Edit Genders Screen"),
+        backgroundColor: Colors.grey[900],
+      ),
+      backgroundColor: Colors.grey[900],
       body: new Center(
         child: new Container(
           width: 300,
           child: new Column(
             children: <Widget>[
+              new Text(""),
               new ElevatedButton(
                 child: new Text("Create Gender"),
                 onPressed: () => {
@@ -60,6 +68,7 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
                   ),
                 },
               ),
+              new Text(""),
               new Expanded(
                 child: new ListView(
                   padding: EdgeInsets.only(bottom: 50),
@@ -98,32 +107,47 @@ class GenderThumbnail extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return new Container(
-      color: Colors.blue,
       height: 50,
       child: new Row(
         children: <Widget>[
           new Expanded(
             flex: 1,
             child: new Container(
-              color: Colors.yellow,
-              child: new Text("${genderId}", textAlign: TextAlign.center,),
+              // color: Colors.yellow,
+              constraints: new BoxConstraints.expand(),
+              child: new Center(
+                child: new Text("${genderId}", textAlign: TextAlign.center,),
+              ),
+              decoration: new BoxDecoration(
+                border: new Border(
+                  right: new BorderSide(width: 1.0, color: Colors.black),
+                ),
+              ),
             ),
           ),
           new Expanded(
             flex: 3,
             child: new Container(
-              color: Colors.green,
-              child: new Text("${genderName}"),
+              // color: Colors.green,
+              child: new Text("  ${genderName}"),
             ),
           ),
           new Expanded(
             flex: 1,
             child: new IconButton(
               icon: new Icon(Icons.delete_rounded),
-              onPressed: () => this.delete_gender(context)
+              onPressed: () => this.delete_gender(context),
+              color: Colors.red[900],
             ),
           ),
         ]
+      ),
+      decoration: new BoxDecoration(
+        color: Colors.grey,
+        border: new Border.all(
+          color: Colors.grey,
+        ),
+        borderRadius: new BorderRadius.all(new Radius.circular(5)),
       ),
     );
   }

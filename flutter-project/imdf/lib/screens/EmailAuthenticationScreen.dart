@@ -11,41 +11,69 @@ class MainEmailAuthScreen extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
         title: const Text("Email Auth"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: new Center( 
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-              width: 200,
-              child: new ElevatedButton(
-                child: new Text("Sign in"),
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => new SigninScreen(),
-                    ),
-                  )
-                }
+      body: new Container(
+        color: Colors.grey[900],
+        child: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Container(
+                width: 200,
+                child: new ElevatedButton(
+                  child: new Row(
+                    children: <Widget>[
+                      new IconButton(
+                        icon: new Icon(Icons.key),
+                        onPressed: () => {},
+                      ),
+                      new Text("Sign in"),
+                    ]
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => new SigninScreen(),
+                      ),
+                    )
+                  },
+                  style: new ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.grey),
+                  ),
+                ),
               ),
-            ),
 
-            new Container(
-              width: 200,
-              child: new ElevatedButton(
-                child: new Text("Sign up"),
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => new SignupScreen(),
-                    ),
-                  )
-                }
+              new Text(""),
+
+              new Container(
+                width: 200,
+                child: new ElevatedButton(
+                  child: new Row(
+                    children: <Widget>[
+                      new IconButton(
+                        icon: new Icon(Icons.person_add),
+                        onPressed: () => {},
+                      ),
+                      new Text("Sign up"),
+                    ]
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => new SigninScreen(),
+                      ),
+                    )
+                  },
+                  style: new ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.grey),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -111,37 +139,53 @@ class _SigninScreenState extends State<SigninScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sign In"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: _email,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Email",
-                  ),
+      backgroundColor: Colors.grey[900],
+      body: new Center(
+        child: new Container(
+          width: 300.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _email,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey,),
+                        ),
+                        labelText: "Email",
+                        labelStyle: new TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    TextField(
+                      obscureText: true,
+                      style: TextStyle(color: Colors.white),
+                      controller: _password,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey,),
+                        ),
+                        labelText: "Password",
+                        labelStyle: new TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    Text("$_statusText", style: TextStyle(color: Colors.red)),
+                    ElevatedButton(
+                      child: Text("Sign In"),
+                      onPressed: () => validate_user(_email.text, _password.text),
+                    ),
+                  ],
                 ),
-                TextField(
-                  controller: _password,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Password",
-                  ),
-                ),
-                Text("$_statusText", style: TextStyle(color: Colors.red)),
-                ElevatedButton(
-                  child: Text("Sign In"),
-                  onPressed: () => validate_user(_email.text, _password.text),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -195,37 +239,53 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sign Up"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: _email,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Email",
-                  ),
+      backgroundColor: Colors.grey[900],
+      body: new Center(
+        child: new Container(
+          width: 300.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _password,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey,),
+                        ),
+                        labelText: "Email",
+                        labelStyle: new TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    TextField(
+                      obscureText: true,
+                      style: TextStyle(color: Colors.white),
+                      controller: _password,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey,),
+                        ),
+                        labelText: "Password",
+                        labelStyle: new TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    Text("$_statusText", style: TextStyle(color: Colors.red)),
+                    ElevatedButton(
+                      child: Text("Sign Up"),
+                      onPressed: () => validate_user(_email.text, _password.text),
+                    ),
+                  ],
                 ),
-                TextField(
-                  controller: _password,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Password",
-                  ),
-                ),
-                Text("$_statusText", style: TextStyle(color: Colors.red)),
-                ElevatedButton(
-                  child: Text("Sign Up"),
-                  onPressed: () => validate_user(_email.text, _password.text),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

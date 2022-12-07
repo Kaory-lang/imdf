@@ -66,14 +66,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Favorites Screen"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: GridView.count(
-        mainAxisSpacing: 20.0,
-        crossAxisSpacing: 20.0,
-        childAspectRatio: 0.5625,
-        physics: new BouncingScrollPhysics(),
-        crossAxisCount: 3,
-        children: thumbnails,
+      body: new Container(
+        color: Colors.grey[900],
+        child: GridView.count(
+          mainAxisSpacing: 20.0,
+          crossAxisSpacing: 20.0,
+          childAspectRatio: 0.5625,
+          physics: new BouncingScrollPhysics(),
+          crossAxisCount: 3,
+          children: thumbnails,
+        ),
       ),
     );
   }

@@ -86,6 +86,7 @@ class _MainScreen extends State<MainScreen> {
     if(this.uid == "58NvYoPnPYTQ7rGpAGXfIhIPsRm2") {
       return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.grey[900],
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
           actions: [
@@ -107,18 +108,23 @@ class _MainScreen extends State<MainScreen> {
             ),
           ]
         ),
-        body: GridView.count(
-          mainAxisSpacing: 20.0,
-          crossAxisSpacing: 20.0,
-          childAspectRatio: 0.5625,
-          physics: BouncingScrollPhysics(),
-          crossAxisCount: 3,
-          children: thumbnails,
+        body: new Container(
+          color: Colors.grey[900],
+          child: GridView.count(
+            padding: new EdgeInsets.all(10.0),
+            mainAxisSpacing: 20.0,
+            crossAxisSpacing: 20.0,
+            childAspectRatio: 0.5625,
+            physics: BouncingScrollPhysics(),
+            crossAxisCount: 3,
+            children: thumbnails,
+          ),
         ),
       );
     } else {
       return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.grey[900],
           automaticallyImplyLeading: false,
           title: const Text("IMDF Main"),
           actions: <Widget>[
@@ -128,13 +134,17 @@ class _MainScreen extends State<MainScreen> {
             ),
           ]
         ),
-        body: GridView.count(
-          mainAxisSpacing: 20.0,
-          crossAxisSpacing: 20.0,
-          childAspectRatio: 0.5625,
-          physics: BouncingScrollPhysics(),
-          crossAxisCount: 3,
-          children: thumbnails,
+        body: new Container(
+          color: Colors.grey[900],
+          child: GridView.count(
+            padding: new EdgeInsets.all(10.0),
+            mainAxisSpacing: 20.0,
+            crossAxisSpacing: 20.0,
+            childAspectRatio: 0.5625,
+            physics: BouncingScrollPhysics(),
+            crossAxisCount: 3,
+            children: thumbnails,
+          ),
         ),
       );
     }

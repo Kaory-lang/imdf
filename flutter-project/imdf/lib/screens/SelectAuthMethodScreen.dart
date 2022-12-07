@@ -12,11 +12,19 @@ class SelectAuthMethodScreen extends StatefulWidget {
 }
 
 class _SelectAuthMethodScreenState extends State<SelectAuthMethodScreen> {
-  Widget create_auth_btn(String label, Widget pageRoute) {
+  Widget create_auth_btn(String label, Widget pageRoute, Icon icon, Color color) {
     return new Container(
       width: 200,
       child: new ElevatedButton(
-        child: new Text("${label}"),
+        child: new Row(
+          children: <Widget> [
+            new IconButton(
+              icon: icon,
+              onPressed: () => {},
+            ),
+            new Text("${label}"),
+          ],
+        ),
         onPressed: () => {
           Navigator.push(
             context,
@@ -24,7 +32,10 @@ class _SelectAuthMethodScreenState extends State<SelectAuthMethodScreen> {
               builder: (context) => pageRoute,
             ),
           ),
-        }
+        },
+        style: new ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(color),
+        ),
       ),
     );
   }
@@ -34,15 +45,21 @@ class _SelectAuthMethodScreenState extends State<SelectAuthMethodScreen> {
     return new Scaffold(
       appBar: new AppBar(
         title: const Text("Auth Screen"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            create_auth_btn("Email Auth", new MainEmailAuthScreen()),
-            create_auth_btn("Google Auth", new GoogleAuthentication()),
-            create_auth_btn("Facebook Auth", new FacebookAuthentication()),
-          ],
+      body: new Container(
+        color: Colors.grey[900],
+        child: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              create_auth_btn("Email Auth", new MainEmailAuthScreen(), new Icon(Icons.email), Colors.grey),
+              new Text(""),
+              create_auth_btn("Google Auth", new GoogleAuthentication(), new Icon(Icons.email), Colors.red.shade600),
+              new Text(""),
+              create_auth_btn("Facebook Auth", new FacebookAuthentication(), new Icon(Icons.facebook), Colors.blue),
+            ],
+          ),
         ),
       ),
     );

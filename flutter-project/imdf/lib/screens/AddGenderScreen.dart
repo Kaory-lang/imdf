@@ -35,7 +35,9 @@ class _AddGenderScreenState extends State<AddGenderScreen> {
     return new Scaffold(
       appBar: new AppBar(
         title: const Text("Add Gender Screen"),
+        backgroundColor: Colors.grey[900],
       ),
+      backgroundColor: Colors.grey[900],
       body: new Center(
         child: new Container(
           width: 300,
@@ -43,12 +45,18 @@ class _AddGenderScreenState extends State<AddGenderScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new TextField(
+                style: new TextStyle(color: Colors.white),
                 controller: genderNameController,
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(),
+                decoration: InputDecoration(
+                  enabledBorder: new OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.grey,),
+                  ),
                   labelText: "Gender Name",
+                  labelStyle: new TextStyle(color: Colors.grey),
                 ),
               ),
+
+              new Text(""),
               
               new ElevatedButton(
                 child: new Text("Save"),

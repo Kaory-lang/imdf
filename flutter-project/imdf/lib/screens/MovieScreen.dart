@@ -26,6 +26,7 @@ class _MovieScreenState extends State<MovieScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Movie Details"),
+        backgroundColor: Colors.grey[900],
       ),
       body: new Column(
         children: <Widget>[

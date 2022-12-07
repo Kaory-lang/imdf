@@ -35,9 +35,9 @@ class _CommentsSectionState extends State<CommentsSection> {
           this.comments.add(
             new Container(
               decoration: new BoxDecoration(
-                color: Colors.blue,
+                color: Colors.grey,
                 border: new Border.all(
-                  color: Colors.blue,
+                  color: Colors.grey,
                 ),
                 borderRadius: new BorderRadius.all(new Radius.circular(10)),
               ),
@@ -62,12 +62,15 @@ class _CommentsSectionState extends State<CommentsSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.cyan[100],
+      color: Colors.grey[900],
       padding: new EdgeInsets.all(10.0),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          new Text("COMMENTS:"),
+          new Text(
+            "COMMENTS:",
+            style: new TextStyle(color: Colors.white,),
+          ),
           new Text(""),
           new Expanded(
             child: new ListView(

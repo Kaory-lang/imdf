@@ -171,10 +171,14 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
         new Padding(
           padding: EdgeInsets.all(5.0),
           child: new TextField(
+            style: TextStyle(color: Colors.white),
             controller: _textControllers[field],
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              enabledBorder: new OutlineInputBorder(
+                borderSide: new BorderSide(color: Colors.grey,),
+              ),
               labelText: field,
+              labelStyle: new TextStyle(color: Colors.grey),
             ),
           ),
         )
@@ -184,14 +188,21 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Movie"),
+        backgroundColor: Colors.grey[900],
       ),
-      body: ListView(children: [
-        ...this._textFields,
-        new ElevatedButton(
-          child: new Text("Add"),
-          onPressed: this.validate_fields,
+      body: new Container(
+        color: Colors.grey[900],
+        child: ListView(
+          children: <Widget>[
+            ...this._textFields,
+            new Text(""),
+            new ElevatedButton(
+              child: new Text("Add"),
+              onPressed: this.validate_fields,
+            ),
+          ],
         ),
-      ],),
+      ),
     );
   }
 }

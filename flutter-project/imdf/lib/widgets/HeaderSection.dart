@@ -66,7 +66,7 @@ class _HeaderState extends State<Header> {
     othData += "\n\n--Synopsis: ${this.data['movie_Synopsis']}";
 
     return Container(
-      color: Colors.cyan[50],
+      color: Colors.grey[900],
       height: 100,
       child: new Row(
         children: <Widget>[
@@ -80,6 +80,7 @@ class _HeaderState extends State<Header> {
                   style: new TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17.0,
+                    color: Colors.white,
                   ),
                 ),
                 new Text(""),
@@ -91,6 +92,7 @@ class _HeaderState extends State<Header> {
                       style: new TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17.0,
+                        color: Colors.white,
                       ),
                     ),
                   ),

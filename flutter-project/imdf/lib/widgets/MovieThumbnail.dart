@@ -186,11 +186,18 @@ class _MovieThumbnail extends State<MovieThumbnail> {
         new Expanded(
           flex: 1,
           child: new Container(
-            color: Colors.blue,
+            constraints: new BoxConstraints.expand(),
+            color: Colors.orange[600],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("${data['movie_Name']}", overflow: TextOverflow.ellipsis),
+                Text(
+                  "${data['movie_Name']}",
+                  overflow: TextOverflow.ellipsis,
+                  style: new TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
                 Text("${data['movie_Synopsis']}", overflow: TextOverflow.ellipsis),
                 Text("${data['movie_ReleaseYear']}"),
               ],
@@ -198,12 +205,12 @@ class _MovieThumbnail extends State<MovieThumbnail> {
           ),
         ),
         new Container(
-          color: Colors.red,
+          color: Colors.orange[700],
           child: new Row(
             children: variableAdminContent,
           )
         ),
-        ]
+      ]
     );
   }
 }

@@ -28,7 +28,8 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
     for (Map<String, dynamic> gender in jsonData) {
       fetchedGenders.add(new GenderThumbnail(
           genderId: gender["gender_Id"],
-          genderName: gender["gender_Name"]
+          genderName: gender["gender_Name"],
+          refreshAction: this.fetch_genders,
       ));
 
       fetchedGenders.add(new Text(""));
@@ -63,14 +64,14 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => new AddGenderScreen(),
+                      builder: (context) => new AddGenderScreen(refreshAction: this.fetch_genders),
                     )
                   ),
                 },
               ),
               new Text(""),
               new Expanded(
-                child: new ListView(
+                child: ListView(
                   padding: EdgeInsets.only(bottom: 50),
                   children: this.gendersThumbnails,
                 ),
@@ -86,8 +87,9 @@ class _EditGenderScreenState extends State<EditGenderScreen> {
 class GenderThumbnail extends StatelessWidget{
   final genderId;
   final genderName;
+  final refreshAction;
 
-  GenderThumbnail({ super.key, this.genderId, this.genderName });
+  GenderThumbnail({ super.key, this.genderId, this.genderName, this.refreshAction });
 
   void delete_gender(BuildContext context) async {
     var response = await http.delete(
@@ -101,6 +103,8 @@ class GenderThumbnail extends StatelessWidget{
           duration: Duration(seconds: 3),
         )
       );
+
+      this.refreshAction();
     }
   }
 

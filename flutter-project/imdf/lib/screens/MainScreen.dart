@@ -22,18 +22,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreen extends State<MainScreen> {
   List<dynamic> _datas = [];
   String? uid;
+  Widget? gridViewItems;
 
   _MainScreen(this.uid);
 
   void fetch_data() async {
     var fetch = await http.get(Uri.parse(ApiUrl.url+"/api/Movie"));
     setState(() => _datas = jsonDecode(fetch.body));
-  }
 
-  @override
-  void initState() {
-    fetch_data();
-    super.initState();
+    this.generate_thumbnails();
   }
 
   void popup_menu_options(int option, BuildContext context) {
@@ -65,15 +62,14 @@ class _MainScreen extends State<MainScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  void generate_thumbnails() {
     List<Widget> thumbnails = <Widget>[];
 
     if(_datas != null) {
       for(final data in _datas) {
         thumbnails.add(
           new GestureDetector(
-            child: MovieThumbnail(data: data, uid: this.uid),
+            child: MovieThumbnail(data: data, uid: this.uid, refreshAction: this.fetch_data),
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => new MovieScreen(data: data, uid: this.uid)),
@@ -83,6 +79,26 @@ class _MainScreen extends State<MainScreen> {
       }
     }
 
+    setState(() => {
+      this.gridViewItems = GridView.count(
+      padding: new EdgeInsets.all(10.0),
+      mainAxisSpacing: 20.0,
+      crossAxisSpacing: 20.0,
+      childAspectRatio: 0.5625,
+      physics: BouncingScrollPhysics(),
+      crossAxisCount: 3,
+      children: [...thumbnails],
+    )});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.fetch_data();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     if(this.uid == "58NvYoPnPYTQ7rGpAGXfIhIPsRm2") {
       return Scaffold(
         appBar: AppBar(
@@ -110,15 +126,7 @@ class _MainScreen extends State<MainScreen> {
         ),
         body: new Container(
           color: Colors.grey[900],
-          child: GridView.count(
-            padding: new EdgeInsets.all(10.0),
-            mainAxisSpacing: 20.0,
-            crossAxisSpacing: 20.0,
-            childAspectRatio: 0.5625,
-            physics: BouncingScrollPhysics(),
-            crossAxisCount: 3,
-            children: thumbnails,
-          ),
+          child: this.gridViewItems,
         ),
       );
     } else {
@@ -136,15 +144,7 @@ class _MainScreen extends State<MainScreen> {
         ),
         body: new Container(
           color: Colors.grey[900],
-          child: GridView.count(
-            padding: new EdgeInsets.all(10.0),
-            mainAxisSpacing: 20.0,
-            crossAxisSpacing: 20.0,
-            childAspectRatio: 0.5625,
-            physics: BouncingScrollPhysics(),
-            crossAxisCount: 3,
-            children: thumbnails,
-          ),
+          child: this.gridViewItems,
         ),
       );
     }

@@ -4,14 +4,18 @@ import '../widgets/ApiUrl.dart';
 import 'dart:convert';
 
 class AddGenderScreen extends StatefulWidget {
-  const AddGenderScreen({super.key});
+  final refreshAction;
+  const AddGenderScreen({super.key, this.refreshAction});
 
   @override
-  _AddGenderScreenState createState() => _AddGenderScreenState();
+  _AddGenderScreenState createState() => _AddGenderScreenState(this.refreshAction);
 }
 
 class _AddGenderScreenState extends State<AddGenderScreen> {
+  final refreshAction;
   TextEditingController genderNameController = new TextEditingController();
+
+  _AddGenderScreenState(this.refreshAction);
   
   void save_gender() async {
     var response = await http.post(
@@ -27,6 +31,8 @@ class _AddGenderScreenState extends State<AddGenderScreen> {
           duration: Duration(seconds: 3),
         )
       );
+
+      this.refreshAction();
     }
   }
 

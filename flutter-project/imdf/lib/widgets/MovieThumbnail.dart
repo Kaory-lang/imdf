@@ -6,20 +6,23 @@ import './ApiUrl.dart';
 class MovieThumbnail extends StatefulWidget {
   var data;
   String? uid;
-  MovieThumbnail({super.key, this.data, this.uid});
+  final refreshAction;
+
+  MovieThumbnail({super.key, this.data, this.uid, this.refreshAction});
 
   @override
-  _MovieThumbnail createState() => _MovieThumbnail(this.data, this.uid);
+  _MovieThumbnail createState() => _MovieThumbnail(this.data, this.uid, this.refreshAction);
 }
 
 class _MovieThumbnail extends State<MovieThumbnail> {
   var data;
   String? uid;
   bool isInFavourites = false;
+  final refreshAction;
 
   Icon favouriteIcon = Icon(Icons.favorite_border);
 
-  _MovieThumbnail(this.data, this.uid);
+  _MovieThumbnail(this.data, this.uid, this.refreshAction);
 
   void checkIsInFavourites() async {
     var fetch = await http.get(
@@ -69,6 +72,8 @@ class _MovieThumbnail extends State<MovieThumbnail> {
           duration: Duration(seconds: 3),
         )
       );
+
+      this.refreshAction();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

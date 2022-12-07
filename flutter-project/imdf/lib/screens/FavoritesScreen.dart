@@ -18,11 +18,13 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   List<dynamic> _datas = [];
   String? uid;
+  List<Widget> thumbnails = <Widget>[];
 
   _FavoritesScreenState(this.uid);
 
   void fetch_data() async {
-   var userFavs = await http.get(Uri.parse(ApiUrl.url + "/api/favourite/${this.uid}"));
+    var userFavs = await http.get(Uri.parse(ApiUrl.url + "/api/favourite/${this.uid}"));
+    List<dynamic> tmpData = [];
 
     if (userFavs.statusCode != 200) return;
 
@@ -35,8 +37,31 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
       if (movie.statusCode != 200) return;
 
-      setState(() => this._datas.add(jsonDecode(movie.body)));
+      tmpData.add(jsonDecode(movie.body));
     }
+    
+    setState(() => this._datas = tmpData);
+    this.generate_thumbnails();
+  }
+
+  void generate_thumbnails() {
+    List<Widget> tmpThumbnails = <Widget>[];
+
+    if(_datas != null) {
+      for(final data in _datas) {
+        tmpThumbnails.add(
+          new GestureDetector(
+            child: MovieThumbnail(data: data, uid: this.uid, refreshAction: this.fetch_data,),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => new MovieScreen(data: data, uid: this.uid)),
+            ),
+          )
+        );
+      }
+    }
+
+    setState(() => this.thumbnails = tmpThumbnails);
   }
 
   @override
@@ -47,22 +72,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> thumbnails = <Widget>[];
-
-    if(_datas != null) {
-      for(final data in _datas) {
-        thumbnails.add(
-          new GestureDetector(
-            child: MovieThumbnail(data: data, uid: this.uid),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => new MovieScreen(data: data, uid: this.uid)),
-            ),
-          )
-        );
-      }
-    }
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Favorites Screen"),
@@ -76,7 +85,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           childAspectRatio: 0.5625,
           physics: new BouncingScrollPhysics(),
           crossAxisCount: 3,
-          children: thumbnails,
+          children: this.thumbnails,
         ),
       ),
     );
